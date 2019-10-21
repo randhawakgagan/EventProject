@@ -1,0 +1,11 @@
+{
+    "/getEvents": {
+      "target": "http://localhost:8181",
+      "secure": false
+    },
+    "/getEventDetails": {
+      "target": "http://localhost:8181",
+      "secure": false
+    }
+
+  }
