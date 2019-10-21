@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+  }
+
+  .mat-row:hover {
+    background-color:skyblue;
+  }
+  .row-link:hover {
+    background-color: rgba(0, 0, 0, .05);
+    cursor: pointer;
+  }
+  div.list{
+    display: inline-block;
+    width:30%;
+    padding:10px;
+}
+div.details{
+    display: inline-block;
+    width:60%;
+    padding:20px;
+}
+.data-form{
+    padding:20px;
+}
+.time-period-navigation{
+    padding:20px;
+}
+.time-period-navigation button{
+    margin-right:20px;
+}

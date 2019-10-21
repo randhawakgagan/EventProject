@@ -1,0 +1,102 @@
+
+        <!-- <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Satrt Date"
+                       (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <h2>
+              {{startDate}}</h2>
+    <div class="col-md-12">
+        <h4>Select Range</h4>
+        <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>Range</mat-label>
+          <mat-select>
+                <mat-option *ngFor="let range of ranges" [value]="range.value">
+                  {{range.viewValue}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-6">
+        <button mat-stroked-button color="primary">Show Events</button>
+    </div> -->
+    <div class="data-form">
+            <h3>Choose Date and Time Period Type</h3>
+            <p>Please select the time period type and click the calender icon to select the start date.</p>
+            <form [formGroup]="dataRequestForm" (ngSubmit)="submitDataRequestForm()">
+                <mat-form-field>
+                            <mat-label>Select Time Period Type</mat-label>
+                            <mat-select matNativeControl formControlName="timePeriodId" (selectionChange)="onTimePeriodSelect($event)">
+                                <mat-option [value]="TIME_PERIOD_WEEK_ID">Week</mat-option>
+                                <mat-option [value]="TIME_PERIOD_MONTH_ID">Month</mat-option>
+                                <mat-option [value]="TIME_PERIOD_QUARTER_ID">Quarter</mat-option>
+                            </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" placeholder="Select Start Date" (dateChange)="onDateChange('change', $event)">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker disabled="false" [startView]="startView" (monthSelected)="chosenMonthHandler($event, startDatePicker)"></mat-datepicker>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" type="submit">FETCH DATA</button>
+            </form>
+        </div>
+       <div *ngIf="events"> <h2 class="float: left;">Range: {{stDate}} - {{endDate}}</h2> </div>
+         <div>
+   
+        <div  class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="event_size">
+              <th mat-header-cell *matHeaderCellDef> Event Metric </th>
+              
+              <td mat-cell *matCellDef="let element"> {{element.event_size}} </td>
+            </ng-container> 
+
+            <ng-container matColumnDef="event_date">
+              <th mat-header-cell *matHeaderCellDef> Event Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.event_date}} </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="event_type">
+              <th mat-header-cell *matHeaderCellDef> Event Type </th>
+              <td mat-cell *matCellDef="let element"> {{element.event_type}} </td>
+            </ng-container>
+        
+         <ng-container matColumnDef="event_summary">
+              <th mat-header-cell *matHeaderCellDef> Event Summary </th>
+              <td mat-cell *matCellDef="let element"> {{element.event_summary}} </td>
+            </ng-container>
+        
+            
+        
+            <!-- <ng-container matColumnDef="event_details">
+                <th mat-header-cell *matHeaderCellDef> Event details </th>
+                <td mat-cell *matCellDef="let element"> {{element.event_details}} </td>
+              </ng-container>  -->
+            
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row)"  class="row-hover"></tr>
+           <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+          </table>
+        
+         
+          <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+              <mat-progress-spinner 
+                color="primary" 
+                mode="indeterminate">
+              </mat-progress-spinner>
+            </mat-card>
+            <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </div> 
+        
+       
+        
