@@ -64,9 +64,9 @@ public class Service {
         objectMapper.configure(Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
 
         ClassLoader classLoader = getClass().getClassLoader();
-       File file = new File(classLoader.getResource("assignment_data_full.json").getFile());
-      // File file= getClass().getResourceAsStream("assignment_data_full.json");
-      //  Event[] events = objectMapper.readValue(file, Event[].class);
+      // File file = new File(classLoader.getResource("assignment_data_full.json").getFile()); commented becuase github doesn't allow commit large files
+       File file = new File(classLoader.getResource("assignment_data_short.json").getFile());
+          
        Event[] events = objectMapper.readValue(file, Event[].class);
         for(int i=0;i<events.length;i++)
         {
